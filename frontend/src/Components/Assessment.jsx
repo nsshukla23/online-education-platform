@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal } from 'antd';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function YourComponent() {
 
   const location = useLocation();
@@ -18,7 +20,7 @@ function YourComponent() {
   const [openModal, setOpenModal] = useState(false);
   const[totalQsns , SetTotalQsns] = useState(0);
   useEffect(() => {
-    fetch(`http://localhost:8080/api/questions/${courseId}`)
+    fetch(`${API_URL}/api/questions/${courseId}`)
       .then(res => res.json())
       .then(res => {
         setTest(res);
@@ -46,7 +48,7 @@ const handleMarks = () =>{
     userId: localStorage.getItem("id"),  
     marks: (correctCount/totalQsns)*100 
   }
-  axios.post(`http://localhost:8080/api/assessments/add/${userId}/${courseId}`, data)
+  axios.post(`${API_URL}/api/assessments/add/${userId}/${courseId}`, data)
   .then(response => {
     console.log('Request successful:', response.data);
   })

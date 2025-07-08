@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function RegistrationForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -27,7 +29,7 @@ function RegistrationForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/users/add", {
+      const response = await fetch(`${API_URL}/api/users/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

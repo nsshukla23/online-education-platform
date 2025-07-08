@@ -6,6 +6,8 @@ import Performance from "./DashBoard/Performance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 function Profile() {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function Profile() {
     async function fetchUserDetails() {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/users/${id}`
+          `${API_URL}/api/users/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch user details.");

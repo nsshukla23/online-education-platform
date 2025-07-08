@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function AddQuestion() {
 
   const location = useLocation();
@@ -71,7 +73,7 @@ function AddQuestion() {
     
 
     try {
-      const response = await fetch('http://localhost:8080/api/questions', {
+      const response = await fetch(`${API_URL}/api/questions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

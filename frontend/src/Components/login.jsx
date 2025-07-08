@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "./UserContext";
 import Navbar from "./Navbar";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +17,7 @@ function Login() {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/users/login", {
+      const response = await fetch(`${API_URL}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +30,7 @@ function Login() {
         localStorage.setItem("email", email);
         console.log(data.token);
         const userDetailsResponse = await fetch(
-          `http://localhost:8080/api/users/details?email=${email}`
+          `${API_URL}/api/users/details?email=${email}`
         );
 
         if (userDetailsResponse.ok) {

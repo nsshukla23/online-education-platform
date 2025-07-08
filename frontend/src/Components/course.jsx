@@ -7,6 +7,8 @@ import { Progress } from "antd";
 import { Button, Modal } from "antd";
 import Feedback from "./Feedback";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Course = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -45,7 +47,7 @@ const Course = () => {
     async function fetchCourse() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/courses/${courseId}`
+          `${API_URL}/api/courses/${courseId}`
         );
         const fetchedCourse = response.data;
         setCourse(fetchedCourse);
@@ -61,7 +63,7 @@ const Course = () => {
   const handleDuration = () => {
     setDuration(playerRef.current.getDuration());
     if(duration!=0){
-      fetch("http://localhost:8080/api/progress/update-duration", {
+      fetch(`${API_URL}/api/progress/update-duration`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -76,7 +78,7 @@ const Course = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/progress/${userId}/${courseId}`)
+    fetch(`${API_URL}/api/progress/${userId}/${courseId}`)
         .then((response) => response.json())
         .then((data) => {
             setPlayed(data);
@@ -92,7 +94,7 @@ const Course = () => {
     const updateProgress = async () => {
         if (courseId && userId) {
             try {
-                const response = await fetch("http://localhost:8080/api/progress/update-progress", {
+                const response = await fetch(`${API_URL}/api/progress/update-progress`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",

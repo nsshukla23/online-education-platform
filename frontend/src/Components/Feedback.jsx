@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Feedback = (props) => {
   const [feedback, setFeedback] = useState("");
 
@@ -8,7 +10,7 @@ const Feedback = (props) => {
   const [feedbacks, setFeedbacks] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/feedbacks/${courseId}`)
+    fetch(`${API_URL}/api/feedbacks/${courseId}`)
       .then((res) => res.json())
       .then((data) => {
         const firstThreeFeedbacks = data.slice(0, 3);
@@ -21,7 +23,7 @@ const Feedback = (props) => {
     if (feedback === "" && !courseId) {
       alert("Please enter feedback to submit");
     } else {
-      fetch("http://localhost:8080/api/feedbacks", {
+      fetch(`${API_URL}/api/feedbacks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

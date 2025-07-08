@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Learnings(){
     const userId = localStorage.getItem("id");
     const [courses , setCourse] = useState([]);
@@ -11,7 +13,7 @@ function Learnings(){
     useEffect(() => {
         async function fetchCourse() {
           try {
-            const response = await axios.get(`http://localhost:8080/api/learning/${userId}`);
+            const response = await axios.get(`${API_URL}/api/learning/${userId}`);
             const fetchedCourse = response.data;
             setCourse(fetchedCourse);
           } catch (err) {

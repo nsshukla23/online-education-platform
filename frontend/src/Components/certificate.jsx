@@ -6,6 +6,8 @@ import jsPDF from "jspdf";
 import img from './images/logo.jpg';
 import seal from './images/seal.png'
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Certificate = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,7 +32,7 @@ const Certificate = () => {
 
     async function fetchUserDetails() {
       try {
-        const response = await fetch(`http://localhost:8080/api/users/${id}`);
+        const response = await fetch(`${API_URL}/api/users/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user details.");
         }
@@ -46,7 +48,7 @@ const Certificate = () => {
     async function fetchCourse() {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/courses/${courseId}`
+          `${API_URL}/api/courses/${courseId}`
         );
 
         if (!response.ok) {

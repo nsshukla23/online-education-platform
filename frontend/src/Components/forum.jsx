@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import './css/forum.css';
 import { useLocation } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Forum() {
 
   const taskRef = useRef("");
@@ -18,10 +20,10 @@ function Forum() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/discussions/${courseId}`)
+    fetch(`${API_URL}/api/discussions/${courseId}`)
       .then((res) => res.json())
       .then((data) => setMessage(data));
-      fetch(`http://localhost:8080/api/courses/${courseId}`).then((res)=>res.json()).then((data)=>setCourse(data));
+      fetch(`${API_URL}/api/courses/${courseId}`).then((res)=>res.json()).then((data)=>setCourse(data));
   }, []);
 
   const addTask = () => {
@@ -29,7 +31,7 @@ function Forum() {
       const newMessage = taskRef.current.value.trim();
       setFormData({ ...formData, content: newMessage });
   
-      fetch('http://localhost:8080/api/discussions/addMessage', {
+      fetch(`${API_URL}/api/discussions/addMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

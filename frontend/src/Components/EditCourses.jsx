@@ -5,6 +5,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function EditCourse() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -53,7 +55,7 @@ function EditCourse() {
   useEffect(() => {
     async function fetchCourse() {
       try {
-        const response = await axios.get(`http://localhost:8080/api/courses/${courseId}`);
+        const response = await axios.get(`${API_URL}/api/courses/${courseId}`);
         const fetchedCourse = response.data;
         setFormData(fetchedCourse);
       } catch (err) {
@@ -74,7 +76,7 @@ function EditCourse() {
     }
     console.log(formData)
     const response = await axios.post(
-      `http://localhost:8080/api/courses/${courseId}`,
+      `${API_URL}/api/courses/${courseId}`,
       formData
     );
 

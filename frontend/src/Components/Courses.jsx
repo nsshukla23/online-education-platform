@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
- import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Courses() {
 
@@ -15,7 +17,7 @@ function Courses() {
    const authToken = localStorage.getItem('token');
   
   useEffect(() => {
-    fetch("http://localhost:8080/api/courses")
+    fetch(`${API_URL}/api/courses`)
       .then((response) => response.json())
       .then((data) => {
         setCourses(data);
@@ -25,7 +27,7 @@ function Courses() {
       });
       const userId = localStorage.getItem("id");
       if(userId){
-        fetch(`http://localhost:8080/api/learning/${userId}`)
+        fetch(`${API_URL}/api/learning/${userId}`)
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -47,7 +49,7 @@ function Courses() {
         userId: userId,
         courseId: courseId
      };
-      axios.post('http://localhost:8080/api/learning', enrollRequest)
+      axios.post(`${API_URL}/api/learning`, enrollRequest)
           .then((response) => {
             if(response.data == "Enrolled successfully"){
               toast.success('Course Enrolled successfully', {

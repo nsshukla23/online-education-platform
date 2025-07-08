@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {useNavigate } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function AddCourse() {
   const navigate  = useNavigate();
   const[error , setError] = useState('');
@@ -22,7 +24,7 @@ function AddCourse() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/api/courses', {
+      const response = await fetch(`${API_URL}/api/courses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
