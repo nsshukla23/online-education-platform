@@ -11,11 +11,9 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class LearningManagementSystemApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.configure().load();
-
-		System.setProperty("DATASOURCE_URL", dotenv.get("DATASOURCE_URL"));
-		System.setProperty("DATASOURCE_USERNAME", dotenv.get("DATASOURCE_USERNAME"));
-		System.setProperty("DATASOURCE_PASSWORD", dotenv.get("DATASOURCE_PASSWORD"));
+		System.setProperty("DATASOURCE_URL", System.getenv("DATASOURCE_URL"));
+		System.setProperty("DATASOURCE_USERNAME", System.getenv("DATASOURCE_USERNAME"));
+		System.setProperty("DATASOURCE_PASSWORD", System.getenv("DATASOURCE_PASSWORD"));
 
 		SpringApplication.run(LearningManagementSystemApplication.class, args);
 	}
