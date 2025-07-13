@@ -12,8 +12,8 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")  // Allow all endpoints
-                        .allowedOrigins("https://cafront.onrender.com")  // React frontend URL
+                registry.addMapping("/**") // Allow all endpoints
+                        .allowedOrigins("FRONTEND_URL", System.getenv("FRONTEND_URL")) // React frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
